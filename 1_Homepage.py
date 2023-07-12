@@ -25,9 +25,9 @@ st.header('Séries Temporais - Refeições do RU')
 st.subheader('Conjunto de Dados')
 st.dataframe(data_ru, column_config={ 'date':'Data', 'lunch':'Almoço', 'dinner':'Jantar'}, use_container_width=True)
 
-st.write(f'Número de Linhas do conjunto de dados: {df.shape[0]}')
-st.write(f'Número de Colunas do conjunto de dados: {df.shape[1]} ')
-st.write(f'Intervalo dos dados: {df.index.min()} : {df.index.max()}')
+st.write(f'Número de Linhas do conjunto de dados: {data_ru.shape[0]}')
+st.write(f'Número de Colunas do conjunto de dados: {data_ru.shape[1]} ')
+st.write(f'Intervalo dos dados: {data_ru.index.min()} : {data_ru.index.max()}')
 
 st.markdown('')
 
@@ -42,7 +42,7 @@ st.markdown('<div style="text-align: justify;">O conjunto de dados contém infor
 st.markdown('')
 
 st.subheader('Estatísticas Descritivas dos Dados')
-st.dataframe(df.describe(), use_container_width=True, column_config={ 'date':'Data', 'lunch':'Almoço', 'dinner':'Jantar'})
+st.dataframe(data_ru.describe(), use_container_width=True, column_config={ 'date':'Data', 'lunch':'Almoço', 'dinner':'Jantar'})
 
 st.markdown('')
 
