@@ -3,12 +3,21 @@ import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
+import holidays
 
 #Análise de Séries Temporais
 from statsmodels.tsa.seasonal import seasonal_decompose
 
 #######################################################################################################################
-data_ru = pd.read_csv('data_ru.csv', sep=';', index_col='date')
+
+data_ru = pd.DataFrame()
+data_ru['date'] = pd.period_range(start='2016-01-04', end='2020-03-31', freq='D').to_timestamp()
+prof_data_ru = pd.read_csv('data_ru.csv', sep = ";")
+prof_data_ru["date"] = pd.to_datetime(prof_data_ru["date"])
+data_ru = data_ru.merge(prof_data_ru, on='date', how='left')
+
+data_ru['lunch'] = data_ru['lunch'].fillna(0)
+data_ru['dinner'] = data_ru['dinner'].fillna(0)
 
 #st.dataframe(data_ru, column_config={ 'date':'Data', 'lunch':'Almoço', 'dinner':'Jantar'}, use_container_width=True)
 
@@ -24,8 +33,9 @@ fig.set_size_inches(18, 12)
 plt.xticks([])
 plt.yticks([])
 plt.show()
+st.pyplot(plt)
 
-st.pyplot(fig)
+
 st.markdown('<div style="text-align: justify;">A partir das figuras acima, podemos ver que '
             'a série temporal de almoços não é estacionária. Pois apresenta sazonalidade e '
             'uma tendência ascendente.</div>', unsafe_allow_html=True)
@@ -43,7 +53,7 @@ fig = dinner.plot()
 fig.set_size_inches(18, 12)
 plt.xticks([])
 plt.yticks([])
-st.pyplot(fig)
+st.pyplot(plt)
 
 st.markdown('<div style="text-align: justify;">A partir das figuras acima, podemos ver que a série temporal '
             'dos jantares não é estacionária. Pois apresenta sazonalidade e uma tendência ascendente.</div>', unsafe_allow_html=True)
@@ -76,7 +86,6 @@ def visualize_stationarity(data_serie, rolling_mean_size):
     plt.xticks([])
     plt.yticks([])
     plt.show()
-
     st.pyplot(plt)
 
 st.subheader('Almoço')

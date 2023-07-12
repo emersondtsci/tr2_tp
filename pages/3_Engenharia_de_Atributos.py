@@ -8,8 +8,14 @@ import plotly.graph_objs as go
 
 from statsmodels.graphics.tsaplots import plot_pacf
 
-data_ru = pd.read_csv('data_ru.csv', sep=';')
+data_ru = pd.DataFrame()
+data_ru['date'] = pd.period_range(start='2016-01-04', end='2020-03-31', freq='D').to_timestamp()
+prof_data_ru = pd.read_csv('data_ru.csv', sep = ";")
+prof_data_ru["date"] = pd.to_datetime(prof_data_ru["date"])
+data_ru = data_ru.merge(prof_data_ru, on='date', how='left')
 
+data_ru['lunch'] = data_ru['lunch'].fillna(0)
+data_ru['dinner'] = data_ru['dinner'].fillna(0)
 st.title('Engennharia de Atributos')
 
 def brazil_holidays(in_df):
@@ -77,8 +83,6 @@ st.markdown('<div style="text-align: justify;">Foram criados novos atributos tem
 st.dataframe(data_ru_with_datetime_attributes, column_config={ 'date':'Data', 'lunch':'Almoço', 'dinner':'Jantar'}, use_container_width=True)
 
 st.subheader('Matriz de Correlação')
-
-#sns.set(rc={'axes.facecolor':'white', 'figure.facecolor':'white'})
 
 sns.heatmap(data_ru_with_datetime_attributes.corr(), annot=True, fmt=".1f", linewidth=.5)
 plt.show()
