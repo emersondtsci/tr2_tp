@@ -54,5 +54,5 @@ st.markdown('')
 
 st.markdown('<div style="text-align: justify;">Uma curiosidade ocorre na coluna "dinner", vemos que o primeiro quartil, '
             'igual a 25% dos dados, são iguais ao valor mínimo e indica que em pelo menos 25% dos dias do nosso '
-            'conjunto de dados não foi servido o jantar.</div>', unsafe_allow_html=True)
+            'conjunto de dados não foi servido o almoço e jantar.</div>', unsafe_allow_html=True)
 
