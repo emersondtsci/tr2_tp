@@ -23,7 +23,7 @@ data_ru['dinner'] = data_ru['dinner'].fillna(0)
 
 st.header('Séries Temporais - Refeições do RU')
 st.subheader('Conjunto de Dados')
-st.dataframe(df, column_config={ 'date':'Data', 'lunch':'Almoço', 'dinner':'Jantar'}, use_container_width=True)
+st.dataframe(data_ru, column_config={ 'date':'Data', 'lunch':'Almoço', 'dinner':'Jantar'}, use_container_width=True)
 
 st.write(f'Número de Linhas do conjunto de dados: {df.shape[0]}')
 st.write(f'Número de Colunas do conjunto de dados: {df.shape[1]} ')
