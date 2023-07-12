@@ -10,7 +10,14 @@ st.sidebar.success("Selecione uma página")
 
 ######################### - LEITURA DOS DADOS - ##############################
 
-df = pd.read_csv('data_ru.csv', sep=';', index_col='date')
+data_ru = pd.DataFrame()
+data_ru['date'] = pd.period_range(start='2016-01-04', end='2020-03-31', freq='D').to_timestamp()
+prof_data_ru = pd.read_csv('data_ru.csv', sep = ";")
+prof_data_ru["date"] = pd.to_datetime(prof_data_ru["date"])
+data_ru = data_ru.merge(prof_data_ru, on='date', how='left')
+
+data_ru['lunch'] = data_ru['lunch'].fillna(0)
+data_ru['dinner'] = data_ru['dinner'].fillna(0)
 
 ######################### - DATAFRAME - ##############################
 
