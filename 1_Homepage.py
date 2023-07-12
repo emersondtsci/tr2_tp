@@ -42,7 +42,7 @@ st.markdown('<div style="text-align: justify;">O conjunto de dados contém infor
 st.markdown('')
 
 st.subheader('Estatísticas Descritivas dos Dados')
-st.dataframe(data_ru.describe(), use_container_width=True, column_config={ 'date':'Data', 'lunch':'Almoço', 'dinner':'Jantar'})
+st.dataframe(data_ru['lunch', 'dinner'].describe(), use_container_width=True, column_config={ 'date':'Data', 'lunch':'Almoço', 'dinner':'Jantar'})
 
 st.markdown('')
 
